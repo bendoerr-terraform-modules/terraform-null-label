@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/gruntwork-io/terratest v0.43.8
-	github.com/kr/pretty v0.3.0
+	github.com/kr/pretty v0.3.1
 )
 
 require (
