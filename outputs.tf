@@ -13,9 +13,9 @@ output "namespace" {
   description = "Normalized namespace"
 }
 
-output "stage" {
+output "project" {
   value       = module.label.stage
-  description = "Normalized stage"
+  description = "Normalized project"
 }
 
 output "environment" {
@@ -50,4 +50,5 @@ output "label_order" {
 
 output "dns_name" {
   value = local.dns_name
+  description = "Normalized DNS Name"
 }

@@ -1,18 +1,20 @@
+// Wrap the Cloudposse Label
 module "label" {
-  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.25.0"
+  source      = "cloudposse/label/null"
+  version     = "0.25.0"
   namespace   = var.context.namespace
   environment = var.context.environment
-  stage       = var.stage
+  stage       = var.project
   name        = var.name
   attributes  = var.context.attributes
   tags        = var.context.tags
 }
 
 locals {
-  dns_name = var.stage != "" ? format(
+  dns_name = var.project != "" ? format(
       "%s.%s.%s",
       var.name,
-      var.stage,
+      var.project,
       var.context.dns_namespace
   ) : format(
       "%s.%s",
