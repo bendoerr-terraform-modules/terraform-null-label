@@ -10,7 +10,7 @@ jobs:
   context:
     runs-on: ubuntu-latest
     steps:
-      - uses: webfactory/ssh-agent@v0.7.0
+      - uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.GH_TF_NULL_CTX_SSH_KEY }}
       - name: Run Terratest
