@@ -6,6 +6,7 @@ region         = "us-west-2"
 region_short   = "uw2"
 instance       = "demo"
 instance_short = "dmo"
+project        = "test"
 attributes     = [
   "attr1"
 ]

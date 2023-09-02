@@ -32,16 +32,16 @@ My opinionated label module.
 
 ```
 module "context" {
-  source    = "git@github.com:bendoerr/terraform-null-context?ref=v0.2.0"
+  source    = "git@github.com:bendoerr/terraform-null-context?ref=v0.3.0"
   namespace = "brd"
   role      = "production'
   region    = "us-east-1"
+  project   = "example'
 }
 
 module "label_thing" {
-  source  = "git@github.com:bendoerr/terraform-null-label?ref=v0.2.0"
+  source  = "git@github.com:bendoerr/terraform-null-label?ref=v0.3.0"
   context = module.context.shared
-  project = "example'
   thing   = "thing"
 }
 
@@ -75,9 +75,9 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_context"></a> [context](#input\_context) | Shared Context from Ben's terraform-null-label | <pre>object({<br>    attributes     = list(string)<br>    dns_namespace  = string<br>    environment    = string<br>    instance       = string<br>    instance_short = string<br>    namespace      = string<br>    region         = string<br>    region_short   = string<br>    role           = string<br>    role_short     = string<br>    tags           = map(string)<br>  })</pre> | n/a | yes |
+| <a name="input_context"></a> [context](#input\_context) | Shared Context from Ben's terraform-null-label | <pre>object({<br>    attributes     = list(string)<br>    dns_namespace  = string<br>    environment    = string<br>    instance       = string<br>    instance_short = string<br>    namespace      = string<br>    region         = string<br>    region_short   = string<br>    role           = string<br>    role_short     = string<br>    project        = string<br>    tags           = map(string)<br>  })</pre> | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Name of this resource | `string` | n/a | yes |
-| <a name="input_project"></a> [project](#input\_project) | Name of the project or application | `string` | n/a | yes |
+| <a name="input_project"></a> [project](#input\_project) | Name of the project or application, this can override the context's project | `string` | `""` | no |
 
 ### Outputs
 

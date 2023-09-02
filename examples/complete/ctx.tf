@@ -1,5 +1,5 @@
 module "context" {
-  source         = "git@github.com:bendoerr/terraform-null-context?ref=v0.2.0"
+  source         = "git@github.com:bendoerr/terraform-null-context?ref=v0.3.0"
   namespace      = var.namespace
   environment    = var.environment
   role           = var.role
@@ -14,4 +14,23 @@ module "context" {
 
 output "context" {
   value = module.context.shared
+}
+
+module "context_with_proj" {
+  source         = "git@github.com:bendoerr/terraform-null-context?ref=v0.3.0"
+  namespace      = var.namespace
+  environment    = var.environment
+  role           = var.role
+  role_short     = var.role_short
+  region         = var.region
+  region_short   = var.region_short
+  instance       = var.instance
+  instance_short = var.instance_short
+  project        = var.project
+  attributes     = var.attributes
+  tags           = var.tags
+}
+
+output "context_with_proj" {
+  value = module.context_with_proj.shared
 }
