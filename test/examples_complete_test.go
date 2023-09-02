@@ -37,135 +37,61 @@ func TestExamplesComplete(t *testing.T) {
 		t.Fatal(makediff(idExpected, idOutput))
 	}
 
-	// Check the Label Tags
-	tagsExpected := map[string]string{
-		"ExtraTag":    "ExtraTagValue",
-		"Instance":    "demo",
-		"Region":      "us-west-2",
-		"Role":        "production",
-		"Name":        idExpected,
-		"Workspace":   "default",
-		"Namespace":   "ex",
-		"Attributes":  "attr1",
-		"Stage":       "example",
-		"Environment": "env",
+	// Type for running tests
+	id_tests := []struct {
+		outputVar string
+		labelId   string
+		tags      map[string]string
+	}{
+		{
+			outputVar: "label",
+			labelId: "ex-env-example-thing-attr1",
+			tags: map[string]string{
+				"Attributes":  "attr1",
+				"Environment": "env",
+				"ExtraTag": "ExtraTagValue",
+				"Instance": "demo",
+				"Name": "ex-env-example-thing-attr1",
+				"Namespace": "ex",
+				"Project": "example",
+				"Region": "us-west-2",
+				"Role": "production",
+				"Stage": "example",
+				"Workspace": "default",
+			},
+		},
+		{
+			outputVar: "label_with_proj",
+			labelId: "ex-env-test-thing-attr1",
+			tags: map[string]string{
+				"Attributes":  "attr1",
+				"Environment": "env",
+				"ExtraTag": "ExtraTagValue",
+				"Instance": "demo",
+				"Name": "ex-env-test-thing-attr1",
+				"Namespace": "ex",
+				"Project": "test",
+				"Region": "us-west-2",
+				"Role": "production",
+				"Stage": "test",
+				"Workspace": "default",
+			},
+		},
 	}
-	tagsOutput := terraform.OutputMap(t, terraformOptions, "label_tags")
-	if !reflect.DeepEqual(tagsExpected, tagsOutput) {
-		t.Fatal(makediff(tagsExpected, tagsOutput))
+
+	for _, tc := range id_tests {
+		t.Run(tc.outputVar, func(tt *testing.T) {
+			outputId := terraform.Output(tt, terraformOptions, tc.outputVar + "_id")
+			if !reflect.DeepEqual(tc.labelId, outputId) {
+				tt.Fatal(makediff(tc.labelId, outputId))
+			}
+			outputTags := terraform.OutputMap(tt, terraformOptions, tc.outputVar + "_tags")
+			if !reflect.DeepEqual(tc.tags, outputTags) {
+				tt.Fatal(makediff(tc.tags, outputTags))
+			}
+		})
 	}
-	//
-	//// Type for running tests
-	//tests := []struct {
-	//	outputVar string
-	//	shared    shared
-	//}{
-	//	{
-	//		outputVar: "ctx_full_shared",
-	//		shared: shared{
-	//			Attributes: []string{
-	//				"attr1",
-	//			},
-	//			Dns_Namespace:  "dmo.uw2",
-	//			Environment:    "env",
-	//			Instance:       "demo",
-	//			Instance_Short: "dmo",
-	//			Namespace:      "ex",
-	//			Region:         "us-west-2",
-	//			Region_Short:   "uw2",
-	//			Role:           "production",
-	//			Role_Short:     "prd",
-	//			Tags: map[string]string{
-	//				"ExtraTag":  "ExtraTagValue",
-	//				"Instance":  "demo",
-	//				"Region":    "us-west-2",
-	//				"Role":      "production",
-	//				"Workspace": "default",
-	//			},
-	//		},
-	//	},
-	//	{
-	//		outputVar: "ctx_no_env_shared",
-	//		shared: shared{
-	//			Attributes: []string{
-	//				"attr1",
-	//			},
-	//			Dns_Namespace:  "dmo.uw2",
-	//			Environment:    "prd-uw2-dmo",
-	//			Instance:       "demo",
-	//			Instance_Short: "dmo",
-	//			Namespace:      "ex",
-	//			Region:         "us-west-2",
-	//			Region_Short:   "uw2",
-	//			Role:           "production",
-	//			Role_Short:     "prd",
-	//			Tags: map[string]string{
-	//				"ExtraTag":  "ExtraTagValue",
-	//				"Instance":  "demo",
-	//				"Region":    "us-west-2",
-	//				"Role":      "production",
-	//				"Workspace": "default",
-	//			},
-	//		},
-	//	},
-	//	{
-	//		outputVar: "ctx_no_env_no_instance_shared",
-	//		shared: shared{
-	//			Attributes: []string{
-	//				"attr1",
-	//			},
-	//			Dns_Namespace:  "uw2",
-	//			Environment:    "prd-uw2",
-	//			Instance:       "",
-	//			Instance_Short: "",
-	//			Namespace:      "ex",
-	//			Region:         "us-west-2",
-	//			Region_Short:   "uw2",
-	//			Role:           "production",
-	//			Role_Short:     "prd",
-	//			Tags: map[string]string{
-	//				"ExtraTag":  "ExtraTagValue",
-	//				"Region":    "us-west-2",
-	//				"Role":      "production",
-	//				"Workspace": "default",
-	//			},
-	//		},
-	//	},
-	//	{
-	//		outputVar: "ctx_short_shared",
-	//		shared: shared{
-	//			Attributes: []string{
-	//				"attr1",
-	//			},
-	//			Dns_Namespace:  "uw2",
-	//			Environment:    "prod-uw2",
-	//			Instance:       "",
-	//			Instance_Short: "",
-	//			Namespace:      "ex",
-	//			Region:         "us-west-2",
-	//			Region_Short:   "uw2",
-	//			Role:           "production",
-	//			Role_Short:     "prod",
-	//			Tags: map[string]string{
-	//				"ExtraTag":  "ExtraTagValue",
-	//				"Region":    "us-west-2",
-	//				"Role":      "production",
-	//				"Workspace": "default",
-	//			},
-	//		},
-	//	},
-	//}
-	//
-	//for _, tc := range tests {
-	//	t.Run(tc.outputVar, func(tt *testing.T) {
-	//		output := shared{}
-	//		terraform.OutputStruct(tt, terraformOptions, tc.outputVar, &output)
-	//		if !reflect.DeepEqual(tc.shared, output) {
-	//			tt.Fatal(makediff(tc.shared, output))
-	//		}
-	//	})
-	//}
-	//
+
 }
 
 func makediff(want interface{}, got interface{}) string {

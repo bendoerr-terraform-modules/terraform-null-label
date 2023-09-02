@@ -95,8 +95,15 @@ variable "context" {
     environment            = ""
     instance               = ""
     instance_short         = ""
+    project                = ""
     namespace              = ""
     tags                   = {}
   }
   description = "Allows the merging of an existing context with this one."
+}
+
+variable "project" {
+  type = string
+  default = ""
+  description = "Name of the project or application, this can override the context's project"
 }

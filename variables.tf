@@ -10,6 +10,7 @@ variable "context" {
     region_short   = string
     role           = string
     role_short     = string
+    project        = string
     tags           = map(string)
   })
   description = "Shared Context from Ben's terraform-null-label"
@@ -22,5 +23,6 @@ variable "name" {
 
 variable "project" {
   type = string
-  description = "Name of the project or application"
+  default = ""
+  description = "Name of the project or application, this can override the context's project"
 }
