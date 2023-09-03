@@ -1,4 +1,4 @@
-module github.com/bendoerr/terraform-null-context/test
+module github.com/bendoerr-terraform-modules/terraform-null-label/test
 
 go 1.20
 

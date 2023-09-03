@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-  <a href="https://github.com/bendoerr/terraform-null-label">
+  <a href="https://github.com/bendoerr-terraform-modules/terraform-null-label">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/logo-dark.png">
       <img src="docs/logo-light.png" alt="Logo">
@@ -13,16 +13,18 @@
     This is how I do it.
     <br/>
     <br/>
-    <a href="https://github.com/bendoerr/terraform-null-label"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/bendoerr-terraform-modules/terraform-null-label"><strong>Explore the docs »</strong></a>
     <br/>
     <br/>
-    <a href="https://github.com/bendoerr/terraform-null-label/issues">Report Bug</a>
+    <a href="https://github.com/bendoerr-terraform-modules/terraform-null-label/issues">Report Bug</a>
     .
-    <a href="https://github.com/bendoerr/terraform-null-label/issues">Request Feature</a>
+    <a href="https://github.com/bendoerr-terraform-modules/terraform-null-label/issues">Request Feature</a>
   </p>
 </p>
 
-![Contributors](https://img.shields.io/github/contributors/bendoerr/terraform-null-label?color=dark-green) ![License](https://img.shields.io/github/license/bendoerr/terraform-null-label)
+![Contributors](https://img.shields.io/github/contributors/bendoerr-terraform-modules/terraform-null-label?color=dark-green) ![Issues](https://img.shields.io/github/issues/bendoerr-terraform-modules/terraform-null-label) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/bendoerr-terraform-modules/terraform-null-label/test.yml)
+![GitHub tag (with filter)](https://img.shields.io/github/v/tag/bendoerr-terraform-modules/terraform-null-label?filter=v*)
+![License](https://img.shields.io/github/license/bendoerr-terraform-modules/terraform-null-label)
 
 ## About The Project
 
@@ -32,7 +34,7 @@ My opinionated label module.
 
 ```
 module "context" {
-  source    = "git@github.com:bendoerr/terraform-null-context?ref=v0.3.0"
+  source    = "git@github.com:bendoerr-terraform-modules/terraform-null-context?ref=v0.4.0"
   namespace = "brd"
   role      = "production'
   region    = "us-east-1"
@@ -40,7 +42,7 @@ module "context" {
 }
 
 module "label_thing" {
-  source  = "git@github.com:bendoerr/terraform-null-label?ref=v0.3.0"
+  source  = "git@github.com:bendoerr-terraform-modules/terraform-null-label?ref=v0.4.0"
   context = module.context.shared
   thing   = "thing"
 }
@@ -98,12 +100,12 @@ No resources.
 
 ## Roadmap
 
-See the [open issues](https://github.com/bendoerr/terraform-null-label/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/bendoerr-terraform-modules/terraform-null-label/issues) for a list of proposed features (and known issues).
 
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-* If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/bendoerr/terraform-null-label/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
+* If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/bendoerr-terraform-modules/terraform-null-label/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
 * Please make sure you check your spelling and grammar.
 * Create individual PR for each suggestion.
 
@@ -117,7 +119,7 @@ Contributions are what make the open source community such an amazing place to b
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](https://github.com/bendoerr/terraform-null-label/blob/main/LICENSE.txt) for more information.
+Distributed under the MIT License. See [LICENSE](https://github.com/bendoerr-terraform-modules/terraform-null-label/blob/main/LICENSE.txt) for more information.
 
 ## Authors
 
