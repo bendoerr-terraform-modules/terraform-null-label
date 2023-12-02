@@ -7,7 +7,7 @@
     </picture>
   </a>
 
-<h3 align="center">Ben's Terraform Null Context Module</h3>
+<h3 align="center">Ben's Terraform Null Label Module</h3>
 
   <p align="center">
     This is how I do it.
