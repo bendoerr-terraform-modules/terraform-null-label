@@ -49,6 +49,6 @@ output "label_order" {
 }
 
 output "dns_name" {
-  value = local.dns_name
+  value       = local.dns_name
   description = "Normalized DNS Name"
 }

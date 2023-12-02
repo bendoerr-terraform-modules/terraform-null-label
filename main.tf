@@ -22,7 +22,7 @@ locals {
     var.name,
     local.gvn_project,
     var.context.dns_namespace
-  ) : format(
+    ) : format(
     "%s.%s",
     var.name,
     var.context.dns_namespace

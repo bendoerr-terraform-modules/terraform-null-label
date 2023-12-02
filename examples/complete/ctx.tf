@@ -1,6 +1,6 @@
 module "context" {
-  source  = "bendoerr-terraform-modules/context/null"
-  version = "0.4.1"
+  source         = "bendoerr-terraform-modules/context/null"
+  version        = "0.4.1"
   namespace      = var.namespace
   environment    = var.environment
   role           = var.role
@@ -18,8 +18,8 @@ output "context" {
 }
 
 module "context_with_proj" {
-  source  = "bendoerr-terraform-modules/context/null"
-  version = "0.4.1"
+  source         = "bendoerr-terraform-modules/context/null"
+  version        = "0.4.1"
   namespace      = var.namespace
   environment    = var.environment
   role           = var.role

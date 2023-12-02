@@ -7,7 +7,7 @@ region_short   = "uw2"
 instance       = "demo"
 instance_short = "dmo"
 project        = "test"
-attributes     = [
+attributes = [
   "attr1"
 ]
 tags = {

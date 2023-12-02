@@ -14,15 +14,18 @@ variable "context" {
     tags           = map(string)
   })
   description = "Shared Context from Ben's terraform-null-label"
+  nullable    = false
 }
 
 variable "name" {
-  type = string
+  type        = string
   description = "Name of this resource"
+  nullable    = false
 }
 
 variable "project" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Name of the project or application, this can override the context's project"
+  nullable    = false
 }
