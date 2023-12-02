@@ -1,9 +1,9 @@
 module github.com/bendoerr-terraform-modules/terraform-null-label/test
 
-go 1.20
+go 1.21.4
 
 require (
-	github.com/gruntwork-io/terratest v0.46.6
+	github.com/gruntwork-io/terratest v0.46.7
 	github.com/kr/pretty v0.3.1
 )
 
