@@ -1,4 +1,4 @@
 scan:
-    skip-dirs:
-        - ./.terraform
-        - ./examples/complete/.terraform
+  skip-dirs:
+    - ./.terraform
+    - ./examples/complete/.terraform
