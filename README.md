@@ -106,41 +106,43 @@ This module creates no resources and will not generate any cost against any
 cloud provider you use.
 
 <!-- BEGIN_TF_DOCS -->
+
 ### Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| Name                                                                     | Version |
+| ------------------------------------------------------------------------ | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 0.13 |
 
 ### Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
+| Name                                               | Source                | Version |
+| -------------------------------------------------- | --------------------- | ------- |
+| <a name="module_label"></a> [label](#module_label) | cloudposse/label/null | 0.25.0  |
 
 ### Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_context"></a> [context](#input\_context) | Shared Context from Ben's terraform-null-label | <pre>object({<br>    attributes     = list(string)<br>    dns_namespace  = string<br>    environment    = string<br>    instance       = string<br>    instance_short = string<br>    namespace      = string<br>    region         = string<br>    region_short   = string<br>    role           = string<br>    role_short     = string<br>    project        = string<br>    tags           = map(string)<br>  })</pre> | n/a | yes |
-| <a name="input_name"></a> [name](#input\_name) | Name of this resource | `string` | n/a | yes |
-| <a name="input_project"></a> [project](#input\_project) | Name of the project or application, this can override the context's project | `string` | `""` | no |
+| Name                                                   | Description                                                                 | Type                                                                                                                                                                                                                                                                                                                      | Default | Required |
+| ------------------------------------------------------ | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
+| <a name="input_context"></a> [context](#input_context) | Shared Context from Ben's terraform-null-label                              | <pre>object({<br> attributes = list(string)<br> dns_namespace = string<br> environment = string<br> instance = string<br> instance_short = string<br> namespace = string<br> region = string<br> region_short = string<br> role = string<br> role_short = string<br> project = string<br> tags = map(string)<br> })</pre> | n/a     |   yes    |
+| <a name="input_name"></a> [name](#input_name)          | Name of this resource                                                       | `string`                                                                                                                                                                                                                                                                                                                  | n/a     |   yes    |
+| <a name="input_project"></a> [project](#input_project) | Name of the project or application, this can override the context's project | `string`                                                                                                                                                                                                                                                                                                                  | `""`    |    no    |
 
 ### Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_attributes"></a> [attributes](#output\_attributes) | List of attributes |
-| <a name="output_delimiter"></a> [delimiter](#output\_delimiter) | Delimiter between `namespace`, `environment`, `stage`, `name` and `attributes` |
-| <a name="output_dns_name"></a> [dns\_name](#output\_dns\_name) | Normalized DNS Name |
-| <a name="output_environment"></a> [environment](#output\_environment) | Normalized environment |
-| <a name="output_id"></a> [id](#output\_id) | Disambiguated ID |
-| <a name="output_label_order"></a> [label\_order](#output\_label\_order) | The naming order of the id output and Name tag |
-| <a name="output_name"></a> [name](#output\_name) | Normalized name |
-| <a name="output_namespace"></a> [namespace](#output\_namespace) | Normalized namespace |
-| <a name="output_project"></a> [project](#output\_project) | Normalized project |
-| <a name="output_tags"></a> [tags](#output\_tags) | Normalized Tag map |
-| <a name="output_tags_as_list_of_maps"></a> [tags\_as\_list\_of\_maps](#output\_tags\_as\_list\_of\_maps) | Additional tags as a list of maps, which can be used in several AWS resources |
+| Name                                                                                            | Description                                                                    |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| <a name="output_attributes"></a> [attributes](#output_attributes)                               | List of attributes                                                             |
+| <a name="output_delimiter"></a> [delimiter](#output_delimiter)                                  | Delimiter between `namespace`, `environment`, `stage`, `name` and `attributes` |
+| <a name="output_dns_name"></a> [dns_name](#output_dns_name)                                     | Normalized DNS Name                                                            |
+| <a name="output_environment"></a> [environment](#output_environment)                            | Normalized environment                                                         |
+| <a name="output_id"></a> [id](#output_id)                                                       | Disambiguated ID                                                               |
+| <a name="output_label_order"></a> [label_order](#output_label_order)                            | The naming order of the id output and Name tag                                 |
+| <a name="output_name"></a> [name](#output_name)                                                 | Normalized name                                                                |
+| <a name="output_namespace"></a> [namespace](#output_namespace)                                  | Normalized namespace                                                           |
+| <a name="output_project"></a> [project](#output_project)                                        | Normalized project                                                             |
+| <a name="output_tags"></a> [tags](#output_tags)                                                 | Normalized Tag map                                                             |
+| <a name="output_tags_as_list_of_maps"></a> [tags_as_list_of_maps](#output_tags_as_list_of_maps) | Additional tags as a list of maps, which can be used in several AWS resources  |
+
 <!-- END_TF_DOCS -->
 
 ## Roadmap
