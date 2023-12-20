@@ -43,9 +43,11 @@ jobs:
 
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: trivy
-        uses: reviewdog/action-trivy@8cfa1fa3912d9e5aebeff91118c0cd212edaf612 # main
+        uses: reviewdog/action-trivy@a322dfa8b4eb7aa12dfaa9770bf3afc32dbea7ce # v1.1.0
         with:
           github_token: ${{ github.token }}
+          trivy_command: config
+          trivy_target: "."
           reporter: github-pr-review
           fail_on_error: "false"
           filter_mode: file
