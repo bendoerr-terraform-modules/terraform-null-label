@@ -13,8 +13,11 @@ module "context" {
   tags           = var.tags
 }
 
-output "context" {
-  value = module.context.shared
+module "label" {
+  source  = "../.."
+  context = module.context.shared
+  project = "example"
+  name    = "thing"
 }
 
 module "context_with_proj" {
@@ -33,6 +36,8 @@ module "context_with_proj" {
   tags           = var.tags
 }
 
-output "context_with_proj" {
-  value = module.context_with_proj.shared
+module "label_with_proj" {
+  source  = "../.."
+  context = module.context_with_proj.shared
+  name    = "thing"
 }
