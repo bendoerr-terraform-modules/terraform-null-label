@@ -4,7 +4,7 @@ locals {
   gvn_tags         = merge(local.gvn_project_tags, var.context.tags)
 }
 
-// Wrap the Cloudposse Label
+# Wrap the Cloudposse Label
 module "label" {
   source      = "cloudposse/label/null"
   version     = "0.25.0"
