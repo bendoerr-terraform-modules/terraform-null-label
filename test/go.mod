@@ -3,7 +3,7 @@ module github.com/bendoerr-terraform-modules/terraform-null-label/test
 go 1.21.4
 
 require (
-	github.com/gruntwork-io/terratest v0.46.16
+	github.com/gruntwork-io/terratest v0.47.0
 	github.com/kr/pretty v0.3.1
 )
 
