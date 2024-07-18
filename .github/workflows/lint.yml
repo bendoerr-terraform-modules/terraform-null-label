@@ -43,7 +43,7 @@ jobs:
 
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: trivy
-        uses: reviewdog/action-trivy@53df306f280cda70854ce997d97759e53c0e3abe # v1.9.0
+        uses: reviewdog/action-trivy@14e16b394d55cc5cbbf0797b04fa5257adbe6e7a # v1.11.0
         with:
           github_token: ${{ github.token }}
           trivy_command: config
@@ -107,7 +107,7 @@ jobs:
 
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: misspell
-        uses: reviewdog/action-misspell@30433ca7be17888deb78a32521706fb65defbf3f # v1.21.0
+        uses: reviewdog/action-misspell@ef8b22c1cca06c8d306fc6be302c3dab0f6ca12f # v1.23.0
         with:
           github_token: ${{ github.token }}
           reporter: github-pr-review
@@ -128,7 +128,7 @@ jobs:
 
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: alex
-        uses: reviewdog/action-alex@cb336002f82b8d6fc261315be81fac2f32ff8ab2 # v1.11.0
+        uses: reviewdog/action-alex@f95df9e356d97e67e4626f04ad125c4a99a906a9 # v1.13.0
         with:
           github_token: ${{ github.token }}
           reporter: github-pr-review
@@ -148,7 +148,7 @@ jobs:
 
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: markdownlint
-        uses: reviewdog/action-markdownlint@03033f367f4405bac3aab53233f9ab38da874884 # v0.22.0
+        uses: reviewdog/action-markdownlint@e9f3ab4fea1433280a4b0eddca17be1340dfea94 # v0.24.0
         with:
           github_token: ${{ github.token }}
           reporter: github-pr-review
@@ -168,7 +168,7 @@ jobs:
 
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: actionlint
-        uses: reviewdog/action-actionlint@afad3b6ab835e5611bda8c8193377e2d5c21413d # v1.51.0
+        uses: reviewdog/action-actionlint@4f8f9963ca57a41e5fd5b538dd79dbfbd3e0b38a # v1.54.0
         with:
           github_token: ${{ github.token }}
           reporter: github-pr-review
