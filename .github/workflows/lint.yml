@@ -63,7 +63,7 @@ jobs:
 
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: golangci-lint
-        uses: reviewdog/action-golangci-lint@7708105983c614f7a2725e2172908b7709d1c3e4 # v2.6.2
+        uses: reviewdog/action-golangci-lint@f9bba13753278f6a73b27a56a3ffb1bfda90ed71 # v2.8.0
         with:
           github_token: ${{ github.token }}
           reporter: github-pr-review
@@ -71,9 +71,6 @@ jobs:
           filter_mode: file
           workdir: test/
           go_version_file: test/go.mod
-          golangci_lint_flags: --verbose --presets
-            bugs,comment,complexity,error,format,import,metalinter,module,performance,style,unused
-            --fast --exclude-use-default --tests --timeout 120s ./...
   prettier:
     runs-on: ubuntu-latest
     permissions:
