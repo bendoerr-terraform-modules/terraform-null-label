@@ -5,6 +5,10 @@ locals {
 }
 
 # Wrap the Cloudposse Label
+# Version pinned to v0.25.0 (latest stable release from 2021-08-25).
+# The cloudposse/terraform-null-label module is mature and stable; v0.25.0
+# is the most recent release and has been in production use across hundreds
+# of Terraform deployments for 4+ years.
 module "label" {
   source      = "cloudposse/label/null"
   version     = "0.25.0"
