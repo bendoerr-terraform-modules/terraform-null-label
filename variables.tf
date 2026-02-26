@@ -23,7 +23,7 @@ variable "name" {
   nullable    = false
 
   validation {
-    condition     = can(regex("^[a-z0-9][a-z0-9-]*[a-z0-9]$", var.name)) || length(var.name) == 1
+    condition     = can(regex("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$", var.name))
     error_message = "name must contain only lowercase alphanumeric characters and hyphens, and cannot start or end with a hyphen."
   }
 
@@ -40,7 +40,7 @@ variable "project" {
   nullable    = false
 
   validation {
-    condition     = var.project == "" || can(regex("^[a-z0-9][a-z0-9-]*[a-z0-9]$", var.project)) || length(var.project) == 1
+    condition     = var.project == "" || can(regex("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$", var.project))
     error_message = "project must be empty or contain only lowercase alphanumeric characters and hyphens, and cannot start or end with a hyphen."
   }
 
