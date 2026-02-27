@@ -50,6 +50,24 @@ advantage of my context module to carry standard part of the label around.
   <img src="https://github.com/bendoerr-terraform-modules/terraform-null-label/raw/main/docs/usage-light.png" alt="Logo">
 </picture>
 
+## Terminology
+
+### Project vs. Stage Mapping
+
+This module uses the concept of **"project"** to represent what the underlying [cloudposse/terraform-null-label](https://github.com/cloudposse/terraform-null-label) module calls **"stage"**.
+
+**Why the difference?**
+- The CloudPosse module was originally designed with "stage" representing deployment stages (dev, staging, prod)
+- In Ben's modules, we use "environment" for that purpose (following `namespace-role-region` → `environment`)
+- We repurposed the CloudPosse "stage" field to represent "project" or "application" — the specific workload or service being deployed
+
+**What this means for you:**
+- When you pass `project = "example"` to this module, it maps to `stage = "example"` in the CloudPosse module
+- Outputs like `module.label.id` will include the project name in the correct position
+- The `project` output exposes `module.label.stage` internally (see comments in `outputs.tf`)
+
+This mapping is intentional and consistent across all of Ben's Terraform modules.
+
 ## Usage
 
 ```terraform

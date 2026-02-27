@@ -5,6 +5,9 @@ locals {
 }
 
 # Wrap the Cloudposse Label
+# Version pinned to v0.25.0 (released 2021-08-25).
+# Pin is intentional for stability/compatibility in this module.
+# Re-validate this pin against upstream tags/releases before changing it.
 module "label" {
   source      = "cloudposse/label/null"
   version     = "0.25.0"

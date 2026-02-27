@@ -14,6 +14,9 @@ output "namespace" {
 }
 
 output "project" {
+  # Note: The cloudposse/label/null module uses "stage" internally to represent
+  # what we conceptually call "project". This output exposes module.label.stage
+  # under the more semantically appropriate name "project" for our use case.
   value       = module.label.stage
   description = "Normalized project"
 }
