@@ -113,6 +113,27 @@ cloud provider you use.
 | ------------------------------------------------------------------------ | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 0.13 |
 
+### Version Constraints
+
+This module is designed to be consumed with **pessimistic version constraints** (`~>`) to ensure predictable behavior across deployments:
+
+```hcl
+module "label" {
+  source  = "bendoerr-terraform-modules/label/null"
+  version = "~> 0.3.0"  # Allows 0.3.x, prevents 0.4.0
+  # ...
+}
+```
+
+**Why pessimistic constraints?**
+- Prevents unexpected breaking changes from major or minor version updates
+- Ensures consistent behavior across environments and team members
+- Makes upgrade impact predictable and controllable
+
+**When a new minor or major version releases**, you control when to adopt it. This is intentional - we prefer explicit, tested upgrades over automatic version bumps that might introduce breaking changes.
+
+For more information on Terraform version constraints, see the [official documentation](https://developer.hashicorp.com/terraform/language/expressions/version-constraints).
+
 ### Modules
 
 | Name                                               | Source                | Version |
