@@ -57,11 +57,13 @@ advantage of my context module to carry standard part of the label around.
 This module uses the concept of **"project"** to represent what the underlying [cloudposse/terraform-null-label](https://github.com/cloudposse/terraform-null-label) module calls **"stage"**.
 
 **Why the difference?**
+
 - The CloudPosse module was originally designed with "stage" representing deployment stages (dev, staging, prod)
 - In Ben's modules, we use "environment" for that purpose (following `namespace-role-region` → `environment`)
 - We repurposed the CloudPosse "stage" field to represent "project" or "application" — the specific workload or service being deployed
 
 **What this means for you:**
+
 - When you pass `project = "example"` to this module, it maps to `stage = "example"` in the CloudPosse module
 - Outputs like `module.label.id` will include the project name in the correct position
 - The `project` output exposes `module.label.stage` internally (see comments in `outputs.tf`)
@@ -123,34 +125,43 @@ No cloud resources were detected
 This module creates no resources and will not generate any cost against any
 cloud provider you use.
 
+## Version Constraints
+
+This module is designed to be consumed with **pessimistic version constraints**
+(`~>`) to ensure predictable behavior across deployments:
+
+```hcl
+module "label" {
+  source  = "bendoerr-terraform-modules/label/null"
+  version = "~> 1.0" # Allows 1.x, prevents 2.0
+  # ...
+}
+```
+
+**Why pessimistic constraints?**
+
+- Prevents unexpected breaking changes from major version updates
+- Ensures consistent behavior across environments and team members
+- Makes upgrade impact predictable and controllable
+
+When a new major version releases, you control when to adopt it. This is
+intentional — we prefer explicit, tested upgrades over automatic version bumps
+that might introduce breaking changes.
+
+For more information on Terraform version constraints, see the
+[official documentation](https://developer.hashicorp.com/terraform/language/expressions/version-constraints).
+
 <!-- BEGIN_TF_DOCS -->
 
 ### Requirements
 
 | Name                                                                     | Version |
 | ------------------------------------------------------------------------ | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 0.13 |
+| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.3  |
 
-### Version Constraints
+### Providers
 
-This module is designed to be consumed with **pessimistic version constraints** (`~>`) to ensure predictable behavior across deployments:
-
-```hcl
-module "label" {
-  source  = "bendoerr-terraform-modules/label/null"
-  version = "~> 0.3.0"  # Allows 0.3.x, prevents 0.4.0
-  # ...
-}
-```
-
-**Why pessimistic constraints?**
-- Prevents unexpected breaking changes from major or minor version updates
-- Ensures consistent behavior across environments and team members
-- Makes upgrade impact predictable and controllable
-
-**When a new minor or major version releases**, you control when to adopt it. This is intentional - we prefer explicit, tested upgrades over automatic version bumps that might introduce breaking changes.
-
-For more information on Terraform version constraints, see the [official documentation](https://developer.hashicorp.com/terraform/language/expressions/version-constraints).
+No providers.
 
 ### Modules
 
@@ -158,13 +169,17 @@ For more information on Terraform version constraints, see the [official documen
 | -------------------------------------------------- | --------------------- | ------- |
 | <a name="module_label"></a> [label](#module_label) | cloudposse/label/null | 0.25.0  |
 
+### Resources
+
+No resources.
+
 ### Inputs
 
-| Name                                                   | Description                                                                 | Type                                                                                                                                                                                                                                                                                                                      | Default | Required |
-| ------------------------------------------------------ | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
-| <a name="input_context"></a> [context](#input_context) | Shared Context from Ben's terraform-null-label                              | <pre>object({<br> attributes = list(string)<br> dns_namespace = string<br> environment = string<br> instance = string<br> instance_short = string<br> namespace = string<br> region = string<br> region_short = string<br> role = string<br> role_short = string<br> project = string<br> tags = map(string)<br> })</pre> | n/a     |   yes    |
-| <a name="input_name"></a> [name](#input_name)          | Name of this resource                                                       | `string`                                                                                                                                                                                                                                                                                                                  | n/a     |   yes    |
-| <a name="input_project"></a> [project](#input_project) | Name of the project or application, this can override the context's project | `string`                                                                                                                                                                                                                                                                                                                  | `""`    |    no    |
+| Name                                                   | Description                                                                 | Type                                                                                                                                                                                                                                                                                                                                   | Default | Required |
+| ------------------------------------------------------ | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
+| <a name="input_context"></a> [context](#input_context) | Shared Context from Ben's terraform-null-label                              | <pre>object({<br/> attributes = list(string)<br/> dns_namespace = string<br/> environment = string<br/> instance = string<br/> instance_short = string<br/> namespace = string<br/> region = string<br/> region_short = string<br/> role = string<br/> role_short = string<br/> project = string<br/> tags = map(string)<br/> })</pre> | n/a     |   yes    |
+| <a name="input_name"></a> [name](#input_name)          | Name of this resource                                                       | `string`                                                                                                                                                                                                                                                                                                                               | n/a     |   yes    |
+| <a name="input_project"></a> [project](#input_project) | Name of the project or application, this can override the context's project | `string`                                                                                                                                                                                                                                                                                                                               | `""`    |    no    |
 
 ### Outputs
 
