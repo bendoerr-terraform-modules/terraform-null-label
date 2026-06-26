@@ -9,7 +9,7 @@
 
 <h3 align="center">Ben's Terraform Null Label Module</h3>
 
-  <p align="center">
+<p align="center">
     This is how I do it.
     <br/>
     <br/>
@@ -155,9 +155,9 @@ For more information on Terraform version constraints, see the
 
 ### Requirements
 
-| Name                                                                     | Version |
-| ------------------------------------------------------------------------ | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.3  |
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.3 |
 
 ### Providers
 
@@ -165,9 +165,9 @@ No providers.
 
 ### Modules
 
-| Name                                               | Source                | Version |
-| -------------------------------------------------- | --------------------- | ------- |
-| <a name="module_label"></a> [label](#module_label) | cloudposse/label/null | 0.25.0  |
+| Name | Source | Version |
+| ---- | ------ | ------- |
+| <a name="module_label"></a> [label](#module_label) | cloudposse/label/null | 0.25.0 |
 
 ### Resources
 
@@ -175,27 +175,27 @@ No resources.
 
 ### Inputs
 
-| Name                                                   | Description                                                                 | Type                                                                                                                                                                                                                                                                                                                                   | Default | Required |
-| ------------------------------------------------------ | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
-| <a name="input_context"></a> [context](#input_context) | Shared Context from Ben's terraform-null-label                              | <pre>object({<br/> attributes = list(string)<br/> dns_namespace = string<br/> environment = string<br/> instance = string<br/> instance_short = string<br/> namespace = string<br/> region = string<br/> region_short = string<br/> role = string<br/> role_short = string<br/> project = string<br/> tags = map(string)<br/> })</pre> | n/a     |   yes    |
-| <a name="input_name"></a> [name](#input_name)          | Name of this resource                                                       | `string`                                                                                                                                                                                                                                                                                                                               | n/a     |   yes    |
-| <a name="input_project"></a> [project](#input_project) | Name of the project or application, this can override the context's project | `string`                                                                                                                                                                                                                                                                                                                               | `""`    |    no    |
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_context"></a> [context](#input_context) | Shared Context from Ben's terraform-null-label | <pre>object({<br/>    attributes     = list(string)<br/>    dns_namespace  = string<br/>    environment    = string<br/>    instance       = string<br/>    instance_short = string<br/>    namespace      = string<br/>    region         = string<br/>    region_short   = string<br/>    role           = string<br/>    role_short     = string<br/>    project        = string<br/>    tags           = map(string)<br/>  })</pre> | n/a | yes |
+| <a name="input_name"></a> [name](#input_name) | Name of this resource | `string` | n/a | yes |
+| <a name="input_project"></a> [project](#input_project) | Name of the project or application, this can override the context's project | `string` | `""` | no |
 
 ### Outputs
 
-| Name                                                                                            | Description                                                                    |
-| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| <a name="output_attributes"></a> [attributes](#output_attributes)                               | List of attributes                                                             |
-| <a name="output_delimiter"></a> [delimiter](#output_delimiter)                                  | Delimiter between `namespace`, `environment`, `stage`, `name` and `attributes` |
-| <a name="output_dns_name"></a> [dns_name](#output_dns_name)                                     | Normalized DNS Name                                                            |
-| <a name="output_environment"></a> [environment](#output_environment)                            | Normalized environment                                                         |
-| <a name="output_id"></a> [id](#output_id)                                                       | Disambiguated ID                                                               |
-| <a name="output_label_order"></a> [label_order](#output_label_order)                            | The naming order of the id output and Name tag                                 |
-| <a name="output_name"></a> [name](#output_name)                                                 | Normalized name                                                                |
-| <a name="output_namespace"></a> [namespace](#output_namespace)                                  | Normalized namespace                                                           |
-| <a name="output_project"></a> [project](#output_project)                                        | Normalized project                                                             |
-| <a name="output_tags"></a> [tags](#output_tags)                                                 | Normalized Tag map                                                             |
-| <a name="output_tags_as_list_of_maps"></a> [tags_as_list_of_maps](#output_tags_as_list_of_maps) | Additional tags as a list of maps, which can be used in several AWS resources  |
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_attributes"></a> [attributes](#output_attributes) | List of attributes |
+| <a name="output_delimiter"></a> [delimiter](#output_delimiter) | Delimiter between `namespace`, `environment`, `stage`, `name` and `attributes` |
+| <a name="output_dns_name"></a> [dns_name](#output_dns_name) | Normalized DNS Name |
+| <a name="output_environment"></a> [environment](#output_environment) | Normalized environment |
+| <a name="output_id"></a> [id](#output_id) | Disambiguated ID |
+| <a name="output_label_order"></a> [label_order](#output_label_order) | The naming order of the id output and Name tag |
+| <a name="output_name"></a> [name](#output_name) | Normalized name |
+| <a name="output_namespace"></a> [namespace](#output_namespace) | Normalized namespace |
+| <a name="output_project"></a> [project](#output_project) | Normalized project |
+| <a name="output_tags"></a> [tags](#output_tags) | Normalized Tag map |
+| <a name="output_tags_as_list_of_maps"></a> [tags_as_list_of_maps](#output_tags_as_list_of_maps) | Additional tags as a list of maps, which can be used in several AWS resources |
 
 <!-- END_TF_DOCS -->
 
@@ -225,10 +225,10 @@ appreciated**.
 ### Creating A Pull Request
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+1. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+1. Push to the Branch (`git push origin feature/AmazingFeature`)
+1. Open a Pull Request
 
 ## License
 
