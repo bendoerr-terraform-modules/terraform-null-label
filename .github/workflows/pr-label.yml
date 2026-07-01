@@ -1,3 +1,9 @@
+# Thin caller -> reusable pr-label in bendoerr-terraform-modules/workflows.
+# pr-label is the moving-@v1 lane (can't block a merge). Trigger stays local (can't live in a reusable
+# workflow). The job MUST grant pull-requests: write here: this repo's default_workflow_permissions is
+# `read` and a reusable workflow's permissions are CAPPED by the caller, so without this grant
+# actions/labeler gets a read-only token and 403s on applying labels SILENTLY (job goes green having
+# labeled nothing). labeler still reads this repo's own .github/labeler.yml (caller context).
 name: Label Pull Request
 
 on:
@@ -8,15 +14,7 @@ permissions:
 
 jobs:
   label:
-    runs-on: ubuntu-latest
-
     permissions:
       contents: read
       pull-requests: write
-
-    steps:
-      - uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
-        with:
-          egress-policy: audit
-
-      - uses: actions/labeler@f27b608878404679385c85cfa523b85ccb86e213 #v6.1.0
+    uses: bendoerr-terraform-modules/workflows/.github/workflows/pr-label.yml@v1
