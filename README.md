@@ -157,7 +157,7 @@ For more information on Terraform version constraints, see the
 
 | Name | Version |
 | ---- | ------- |
-| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.3 |
+| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 1.3.0 |
 
 ### Providers
 
