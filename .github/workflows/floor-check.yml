@@ -47,6 +47,17 @@ jobs:
           # Keep the matrix honest against versions.tf: a drifted matrix value would
           # silently test the wrong version. Fail loudly instead.
           # `|| true`: a no-match grep would abort under pipefail before the friendly error.
+          # `|| true` is SAFE HERE, and only because of the test BELOW: an empty value is
+          # compared `!=` against the matrix pin, so a failed scan lands in the FAILURE branch
+          # rather than the pass branch. That safety is a property of the following test, not of
+          # this line - change the test and this becomes the fail-open shape.
+          #
+          # AND THESE TESTS NOW CARRY A SECOND DUTY THEY WERE NOT WRITTEN FOR, stated because it
+          # was picked up silently: they are this job's ONLY guard on the empty-checkout / wrong
+          # working-directory route. `grep -rn` over such a tree exits 1, so `all=""` and the
+          # decomposed scan below reads clean; what actually reds that world is `declared=` not
+          # matching the matrix pin, or `-z "$root"` firing. An unstated duty is one refactor from
+          # being dropped by someone who only reads what the test appears to be for.
           declared=$(grep -oE 'required_version *= *">= [0-9]+\.[0-9]+\.[0-9]+"' versions.tf | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1 || true)
           if [ "$declared" != "${{ matrix.tf }}" ]; then
             echo "::error::floor-check matrix pins ${{ matrix.tf }} but ${{ matrix.module }}/versions.tf declares >= ${declared:-<none>} — update the matrix to match the declared floor"
@@ -88,14 +99,37 @@ jobs:
           # no org-wide floor is enforced here; that policy question lives elsewhere.
           # Subsumes "no stale floors" and "no ~> caps" and makes the convention executable
           # instead of advice.
+          # `|| true` is SAFE HERE for the same reason: `-z "$root"` below treats an empty
+          # value as an error. The safety lives in the test, not in this line.
           root=$(grep -oE 'required_version *= *">= [0-9]+\.[0-9]+\.[0-9]+"' versions.tf | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1 || true)
           if [ -z "$root" ]; then
             echo "::error::root versions.tf declares no three-part '>= x.y.z' required_version — the convention needs a root floor to derive its baseline"
             exit 1
           fi
-          bad=$(grep -rn 'required_version' --include='*.tf' . \
-            | grep -vE "required_version += +\">= ${root//./\\.}\"" \
-            | grep -v 'floor-reason:' || true)
+          # Only the stage that touches the FILESYSTEM can have an I/O ERROR; the filter stages
+          # read a variable and cannot.
+          # NARROWED DELIBERATELY: "cannot error" would be too broad. `grep -vE` still exits 2 on
+          # an INVALID PATTERN, and the trailing `|| true` would collapse that to bad="" -> a
+          # pass. It is unreachable HERE only because `root` is constrained to a three-part
+          # numeric by its own extraction regex. That is a property of THIS derivation, not of
+          # the shape - and this shape propagates to repos whose root= sites differ. Loosen the
+          # derivation and this stage needs the explicit case treatment the scan stage has. So the error space is preserved exactly where it exists,
+          # and `|| true` stays where it is genuinely safe.
+          # WHY NOT A SINGLE PIPELINE WITH AN rc CHECK: under `pipefail` the status is the
+          # RIGHTMOST non-zero, so a first-stage `grep -rn` error (2) followed by a legitimate
+          # last-stage `grep -v` no-match (1) reports 1 - the error masked by a downstream clean.
+          # An rc check on the old form would have looked correct and changed nothing.
+          rc=0
+          all=$(grep -rn 'required_version' --include='*.tf' .) || rc=$?
+          case "$rc" in
+            0) ;;
+            1) all="" ;;
+            *)
+              echo "::error::floor scan FAILED (grep rc=$rc) - this is NOT a clean result; the floor gate did not run"
+              exit 1
+              ;;
+          esac
+          bad=$(printf '%s\n' "$all" | grep -vE "required_version += +\">= ${root//./\\.}\"" | grep -v 'floor-reason:') || true
           if [ -n "$bad" ]; then
             echo "::error::each required_version must match the root floor '>= ${root}' or carry a '# floor-reason:' receipt"
             echo "$bad"
